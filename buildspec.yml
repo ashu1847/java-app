@@ -8,7 +8,7 @@ phases:
     commands:
       - echo "Install phase ..."
     runtime-versions:
-      java: corretto17
+      java: corretto11
   pre_build:
     commands:
       - echo "Pre build phase ..."
@@ -24,7 +24,7 @@ phases:
   build:
     commands:
       - echo "Build phase ..."
-      - mvn clean package
+      - mvn package
   post_build:
     commands:
       - echo "Post build phase ..."
