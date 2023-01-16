@@ -1,0 +1,29 @@
+version: 0.2
+env:
+  secrets-manager:
+    SONAR_LOGIN: local/sonar:sonartoken
+    SONAR_HOST: local/sonar:HOST
+phases:
+  install:
+    commands:
+      - echo "Install phase ..."
+    runtime-versions:
+      java-version: corretto11
+  pre_build:
+    commands:
+      - echo "Pre build phase ..."
+      - yum update -y
+      - wget https://archive.apache.org/dist/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz
+      - echo "Current path is >>>"
+      - sh $pwd
+      - tar xvf apache-maven-3.8.3-bin.tar.gz
+      - ls $pwd
+      - export PATH=$PATH:./apache-maven-3.8.3/bin
+  build:
+    commands:
+      - echo "Build phase ..."
+      - mvn clean package
+  post_build:
+    commands:
+      - echo "Post build phase ..."
+      - mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST
