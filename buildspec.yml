@@ -8,7 +8,7 @@ phases:
     commands:
       - echo "Install phase ..."
     runtime-versions:
-      java: corretto8
+      java: corretto11
   pre_build:
     commands:
       - echo "Pre build phase ..."
