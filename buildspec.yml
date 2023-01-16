@@ -19,8 +19,8 @@ phases:
       #- tar xvf apache-maven-3.8.3-bin.tar.gz
       #- ls $pwd
       #- export PATH=$PATH:./apache-maven-3.8.3/bin
-      - java --version
-      - mvn --version
+      #- java --version
+      #- mvn --version
   build:
     commands:
       - echo "Build phase ..."
