@@ -13,7 +13,7 @@ phases:
     commands:
       - echo "Pre build phase ..."
       #- yum update -y
-      -# wget https://archive.apache.org/dist/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz
+      #- wget https://archive.apache.org/dist/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz
       #- echo "Current path is >>>"
       #- sh $pwd
       #- tar xvf apache-maven-3.8.3-bin.tar.gz
