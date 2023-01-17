@@ -25,8 +25,9 @@ phases:
   build:
     commands:
       - echo "Build phase ..."
-      - mvn package
+      - mvn clean package
+      - mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project
   post_build:
     commands:
       - echo "Post build phase ..."
-      - sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project 
+      #- mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project 
