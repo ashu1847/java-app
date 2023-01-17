@@ -13,21 +13,17 @@ phases:
   pre_build:
     commands:
       - echo "Pre build phase ..."
-      #- yum update -y
-      #- wget https://archive.apache.org/dist/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz
-      #- echo "Current path is >>>"
-      #- sh $pwd
-      #- tar xvf apache-maven-3.8.3-bin.tar.gz
-      #- ls $pwd
-      #- export PATH=$PATH:./apache-maven-3.8.3/bin
-      #- java --version
-      #- mvn --version
+      - yum update -y
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
+      - echo "Current path is >>>"
+      - yum install unzip -y
+      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
+      - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/
   build:
     commands:
       - echo "Build phase ..."
       - mvn clean package
-      #- mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project
   post_build:
     commands:
       - echo "Post build phase ..."
-      #- mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project 
+      - mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project 
