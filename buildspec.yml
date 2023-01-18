@@ -26,4 +26,4 @@ phases:
   post_build:
     commands:
       - echo "Post build phase ..."
-      - mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project 
+      - mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project Dsonar.scm.disabled=true
