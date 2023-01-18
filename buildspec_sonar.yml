@@ -21,7 +21,7 @@ phases:
   build:
     commands:
       - mvn -X clean package     
-      - mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project
+      - mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project -Dsonar.scm.disabled=true
       #- sleep 5
       #- curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       #- cat result.json
