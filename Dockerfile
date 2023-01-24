@@ -1,8 +1,2 @@
-# Pull base image 
-From tomcat:8-jre8
-
-# Maintainer 
-MAINTAINER "valaxytech@gmail.com" 
-COPY /var/lib/jenkins/workspace/java-app/webapp/target/webapp.war /usr/local/tomcat/webapps
-#COPY ./webapp.war /usr/local/tomcat/webapps
-
+FROM httpd:2.4
+COPY index.html /usr/local/apache2/htdocs/index.html
