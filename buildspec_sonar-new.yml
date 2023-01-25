@@ -1,0 +1,38 @@
+version: 0.2
+env:
+  secrets-manager:
+    SONAR_LOGIN: local/sonar:sonartoken
+    SONAR_HOST: local/sonar:HOST
+    Project : local/sonar:Project
+phases:
+  install:
+    commands:
+      - echo "Install phase ..."
+    runtime-versions:
+      java: corretto11
+  pre_build:
+    commands:
+      - echo "Pre build phase ..."
+      - yum update -y
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
+      - echo "Current path is >>>"
+      - yum install unzip -y
+      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
+      - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/
+      - echo "Running SonarQube analysis..."
+      - mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST -Dsonar.projectKey=$Project -Dsonar.scm.disabled=true
+  build:
+    commands:
+      - echo "Build phase ..."
+      - mvn clean package
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t webapp-new .
+      - docker tag webapp-new:latest 431167860687.dkr.ecr.us-west-1.amazonaws.com/demo-repo:webapp-new
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push 431167860687.dkr.ecr.us-west-1.amazonaws.com/demo-repo:webapp-new
